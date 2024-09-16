@@ -9,5 +9,5 @@
 </section>
 
 <section>
-	<pre>{auth.user?.username}</pre>
+	<pre>{auth.model?.username}</pre>
 </section>

@@ -5,7 +5,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import ArrowRight from 'lucide-svelte/icons/arrow-right';
 	import { getAuthContext } from '$lib/stores/auth.svelte';
-	import { goto } from '$app/navigation';
+	import ArrowLeft from 'lucide-svelte/icons/arrow-left';
 
 	const auth = getAuthContext();
 
@@ -14,7 +14,7 @@
 
 	const attemptRegister = function() {
 		auth.register(username, password).then(() => {
-			goto('/', { replaceState: true });
+			history.back();
 		});
 	};
 </script>
@@ -40,7 +40,11 @@
 					<Input required type="password" placeholder="Enter a password" minlength={8} bind:value={password} />
 				</Label>
 			</Card.Content>
-			<Card.Footer>
+			<Card.Footer class="flex flex-col gap-4">
+				<Button class="w-full gap-2" variant="secondary" onclick={() => history.back()}>
+					<ArrowLeft class="w-4 h-4"/>
+					Cancel
+				</Button>
 				<Button type="submit" class="w-full gap-2">
 					Sign Up
 					<ArrowRight class="w-4 h-5" />

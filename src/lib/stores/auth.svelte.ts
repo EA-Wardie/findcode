@@ -3,22 +3,27 @@ import { getContext, setContext } from 'svelte';
 import type { AuthModel } from 'pocketbase';
 
 class Auth {
-	isValid = $state<boolean>(false);
-	user = $state<AuthModel>(null);
+	// isValid = $state<boolean>(false);
+	// user = $state<AuthModel>(null);
 
 	constructor() {
-		$effect(() => {
-			this.isValid = pb.authStore.isValid;
-			this.user = pb.authStore.model;
-		});
+		// $effect(() => {
+		// 	this.isValid = pb.authStore.isValid;
+		// 	this.user = pb.authStore.model;
+		// });
+	}
+
+	get isValid() {
+		return pb.authStore.isValid;
+	}
+
+	get model() {
+		return pb.authStore.model;
 	}
 
 	async login(username: string, password: string) {
 		try {
 			await pb.collection('users').authWithPassword(username, password);
-
-			this.isValid = pb.authStore.isValid;
-			this.user = pb.authStore.model;
 		} catch (error) {
 			console.error(error);
 		}

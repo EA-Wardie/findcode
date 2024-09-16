@@ -3,11 +3,8 @@
 	import { page } from '$app/stores';
 	import { ModeWatcher } from 'mode-watcher';
 	import { Separator } from '$lib/components/ui/separator';
-	import { setAuthContext } from '$lib/stores/auth.svelte';
 
 	let { children } = $props();
-
-	setAuthContext();
 </script>
 
 <svelte:head>
