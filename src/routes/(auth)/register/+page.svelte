@@ -4,16 +4,16 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Button } from '$lib/components/ui/button';
 	import ArrowRight from 'lucide-svelte/icons/arrow-right';
-	import { getAuthContext } from '$lib/stores/auth.svelte';
+	import { getAuthStoreContext } from '$lib/stores/auth.svelte';
 	import ArrowLeft from 'lucide-svelte/icons/arrow-left';
 
-	const auth = getAuthContext();
+	const authStore = getAuthStoreContext();
 
 	let username = $state<string>('');
 	let password = $state<string>('');
 
 	const attemptRegister = function() {
-		auth.register(username, password).then(() => {
+		authStore.register(username, password).then(() => {
 			history.back();
 		});
 	};
@@ -37,12 +37,13 @@
 				</Label>
 				<Label class="flex flex-col gap-1">
 					Password
-					<Input required type="password" placeholder="Enter a password" minlength={8} bind:value={password} />
+					<Input required type="password" placeholder="Enter a password" minlength={8}
+						   bind:value={password} />
 				</Label>
 			</Card.Content>
 			<Card.Footer class="flex flex-col gap-4">
 				<Button class="w-full gap-2" variant="secondary" onclick={() => history.back()}>
-					<ArrowLeft class="w-4 h-4"/>
+					<ArrowLeft class="w-4 h-4" />
 					Cancel
 				</Button>
 				<Button type="submit" class="w-full gap-2">

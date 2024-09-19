@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { setAuthContext } from '$lib/stores/auth.svelte';
+	import { setAuthStoreContext } from '$lib/stores/auth.svelte';
+	import { setPostStoreContext } from '$lib/stores/posts.svelte';
 
 	let { children } = $props();
 
-	setAuthContext();
+	setAuthStoreContext();
+	setPostStoreContext();
 </script>
 
 {@render children()}

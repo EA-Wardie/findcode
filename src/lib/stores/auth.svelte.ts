@@ -1,17 +1,8 @@
-import { pb } from '$lib/pocketbase';
+import { pb } from '../pb';
 import { getContext, setContext } from 'svelte';
-import type { AuthModel } from 'pocketbase';
 
-class Auth {
-	// isValid = $state<boolean>(false);
-	// user = $state<AuthModel>(null);
-
-	constructor() {
-		// $effect(() => {
-		// 	this.isValid = pb.authStore.isValid;
-		// 	this.user = pb.authStore.model;
-		// });
-	}
+class AuthStore {
+	constructor() {}
 
 	get isValid() {
 		return pb.authStore.isValid;
@@ -43,12 +34,12 @@ class Auth {
 	}
 }
 
-const AUTH_STORE_CONTEXT_ID: string = 'store:auth';
+const STORE_CONTEXT_ID: string = 'store:auth';
 
-export const setAuthContext = function (): void {
-	setContext(AUTH_STORE_CONTEXT_ID, new Auth());
+export const setAuthStoreContext = function (): void {
+	setContext(STORE_CONTEXT_ID, new AuthStore());
 };
 
-export const getAuthContext = function (): Auth {
-	return getContext<Auth>(AUTH_STORE_CONTEXT_ID);
+export const getAuthStoreContext = function (): AuthStore {
+	return getContext<AuthStore>(STORE_CONTEXT_ID);
 };

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../../app.css';
 	import { page } from '$app/stores';
-	import { getAuthContext } from '$lib/stores/auth.svelte.js';
+	import { getAuthStoreContext } from '$lib/stores/auth.svelte.js';
 	import { ModeWatcher } from 'mode-watcher';
 	import { Button, buttonVariants } from '$lib/components/ui/button';
 	import { Separator } from '$lib/components/ui/separator';
@@ -9,10 +9,10 @@
 
 	let { children } = $props();
 
-	const auth = getAuthContext();
+	const authStore = getAuthStoreContext();
 
 	const attemptLogout = function() {
-		auth.logout();
+		authStore.logout();
 	};
 </script>
 
@@ -28,7 +28,7 @@
 			<a class="px-4 mt-1" href="/"><h3>find::<i>CODE</i></h3></a>
 			<Separator orientation="vertical" />
 		</nav>
-		{#if !auth.isValid}
+		{#if !authStore.isValid}
 			<nav class="flex">
 				<Separator orientation="vertical" />
 				<Button variant="ghost" href="/register">Sign Up</Button>
@@ -61,10 +61,16 @@
 			</nav>
 		{/if}
 	</header>
-	<main class="w-full grow flex flex-col gap-8 md:gap-12 p-4 md:p-12">
+	<main class="w-full max-w-7xl mx-auto grow flex flex-col gap-8 md:gap-12 p-4 md:p-12">
 		{@render children()}
 	</main>
-	<footer class="w-full h-10 sticky bottom-0 grow-0 shrink-0 flex justify-between border-y">
-
+	<footer class="w-full sticky bottom-0 grow-0 shrink-0 flex justify-between border-y">
+		<nav class="flex">
+			<Button variant="ghost" class="flex gap-1.5" href="https://kit.svelte.dev/" target="_blank"><p>Built
+				with</p>
+				<p class="text-amber-500">SvelteKit</p></Button>
+			<Separator orientation="vertical" />
+		</nav>
+		<nav></nav>
 	</footer>
 </div>

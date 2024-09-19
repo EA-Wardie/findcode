@@ -5,16 +5,15 @@
 	import { Button } from '$lib/components/ui/button';
 	import ArrowRight from 'lucide-svelte/icons/arrow-right';
 	import ArrowLeft from 'lucide-svelte/icons/arrow-left';
-	import { getAuthContext } from '$lib/stores/auth.svelte';
-	import { goto } from '$app/navigation';
+	import { getAuthStoreContext } from '$lib/stores/auth.svelte';
 
-	const auth = getAuthContext();
+	const authStore = getAuthStoreContext();
 
 	let username = $state<string>('');
 	let password = $state<string>('');
 
 	const attemptLogin = function() {
-		auth.login(username, password).then(() => {
+		authStore.login(username, password).then(() => {
 			history.back();
 		});
 	};
@@ -38,12 +37,13 @@
 				</Label>
 				<Label class="flex flex-col gap-1">
 					Password
-					<Input required type="password" placeholder="Enter your password" minlength={8} bind:value={password} />
+					<Input required type="password" placeholder="Enter your password" minlength={8}
+						   bind:value={password} />
 				</Label>
 			</Card.Content>
 			<Card.Footer class="flex flex-col gap-4">
 				<Button class="w-full gap-2" variant="secondary" onclick={() => history.back()}>
-					<ArrowLeft class="w-4 h-4"/>
+					<ArrowLeft class="w-4 h-4" />
 					Cancel
 				</Button>
 				<Button class="w-full gap-2" type="submit">
