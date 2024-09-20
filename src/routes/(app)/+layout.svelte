@@ -25,7 +25,7 @@
 <div class="w-full h-full min-h-dvh flex flex-col">
 	<header class="w-full h-10 sticky top-0 grow-0 shrink-0 flex items-center justify-between border-y">
 		<nav class="h-full flex items-center">
-			<a class="px-4 mt-1" href="/"><h3>find::<i>CODE</i></h3></a>
+			<Button variant="ghost" href="/">find::<i>CODE</i></Button>
 			<Separator orientation="vertical" />
 		</nav>
 		{#if !authStore.isValid}
